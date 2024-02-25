@@ -6,11 +6,17 @@
 	For any mailboxes with errors other than no license (most common, can't put a license on the mailbox because of an email address conflict), email a report
 #>
 
+# set variables
+# MSOnline connection variables
 $username = "enter username"
 $Passwordfile = "put where password file is"
 $keyfile = "put where key file is"
 $key = Get-Content $KeyFile
 $Credential = new-object System.Management.Automation.PSCredential $username,(Get-content $Passwordfile|ConvertTo-SecureString -key $key)
+
+# local path for output
+$export_path = "c:\temp"
+
 
 # Connect MSOLService
 Import-Module MSOnline
@@ -111,7 +117,7 @@ foreach ($i in $need_license){
 
 # If there are other errors, email report
 If($other_error.count -gt 0) {
-	$other_error | export-csv -notypeinfo "E:\PowerShell Scripts\Litigation Hold\output\other_error.csv"
+	$other_error | export-csv -notypeinfo "$($export_path)\other_error.csv"
 	# email relay settings
 	$smtpServer ="smtp_server"
 	$SMTPPort = "25"
@@ -122,9 +128,9 @@ If($other_error.count -gt 0) {
 	$recipient = "recipient_address"
 
 	# email report to systems
-	$files = Get-ChildItem -Path "E:\PowerShell Scripts\Litigation Hold\output"
+	$files = Get-ChildItem -Path $export_path
 	foreach($csv in $files){
-	    $attachment = "E:\PowerShell Scripts\Litigation Hold\output\$($csv.name)"
+	    $attachment = "$($export_path)\$($csv.name)"
 	    Send-Mailmessage -smtpServer $smtpServer -Port $SMTPPort -from $FromAddress -to $recipient -subject $subject -Attachments $attachment -Encoding $textEncoding -ErrorAction Stop
 	} 
 }
