@@ -123,7 +123,7 @@ If($other_error.count -gt 0) {
 	$SMTPPort = "25"
 	$FromAddress = "From_address"
 	$subject = "Litigation Hold Errors"
-	$body = ""
+	$body = "Attached is the errors from the Litigation Hold script."
 	$textEncoding = [System.Text.Encoding]::UTF8
 	$recipient = "recipient_address"
 
