@@ -2,8 +2,8 @@
     Checks for unsupported characters in onedrive/sharepoint and replaces them so uploads will not fail
 #>
 
-
-$Folder = "G:\shares\home\dHyman\"
+# specify file path
+$Folder = "ie c:\temp\"
 $Items = Get-ChildItem -Path $Folder -Recurse
 
 $UnsupportedChars = '[!&{}~#%]'
