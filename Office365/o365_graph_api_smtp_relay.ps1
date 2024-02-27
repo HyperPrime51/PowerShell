@@ -1,3 +1,7 @@
+<#
+  Connects to graph API in O365 to send an email 
+#>
+
 # app registration in Azure variable, app registration needs Mail.Send permission
 $clientID = "client id"
 $Clientsecret = "client secret"
