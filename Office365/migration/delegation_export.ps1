@@ -1,4 +1,5 @@
 <#
+	This is for the source tenant
 	Connects to exchange online, takes a list of mailboxes, and exports full access, send as, send on behalf of, calendar, contact delegation and MessageCopyForSentAsEnabled, MessageCopyForSendOnBehalfEnabled settings. Exchange Online will prompt for credentials, could be modified to save credentials or use app registration to run exports
 #>
 # set variables
@@ -9,12 +10,12 @@ $username = "user@domain.com"
 $allmbs = "c:\temp\all_mbs.csv"
 
 # set path for export of files
-$export_path_fullaccess = "c:\temp\fullaccess.csv"
-$export_path_sendas = "c:\temp\sendas.csv"
-$export_path_sendonbehalf = "c:\temp\sendonbehalf.csv"
-$export_path_calendar = "c:\temp\calendar.csv"
-$export_path_contact = "c:\temp\contact.csv"
-$export_path_messagecopy = "c:\temp\messagecopy.csv"
+$export_path_fullaccess = "c:\temp\delegation\fullaccess.csv"
+$export_path_sendas = "c:\temp\delegation\sendas.csv"
+$export_path_sendonbehalf = "c:\temp\delegation\sendonbehalf.csv"
+$export_path_calendar = "c:\temp\delegation\calendar.csv"
+$export_path_contact = "c:\temp\delegation\contact.csv"
+$export_path_messagecopy = "c:\temp\delegation\messagecopy.csv"
 
 
 Connect-ExchangeOnline -UserPrincipalName $username
