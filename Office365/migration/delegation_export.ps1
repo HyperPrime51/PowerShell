@@ -10,12 +10,12 @@ $username = "user@domain.com"
 $allmbs = "c:\temp\all_mbs.csv"
 
 # set path for export of files
-$export_path_fullaccess = "c:\temp\delegation\fullaccess.csv"
-$export_path_sendas = "c:\temp\delegation\sendas.csv"
-$export_path_sendonbehalf = "c:\temp\delegation\sendonbehalf.csv"
-$export_path_calendar = "c:\temp\delegation\calendar.csv"
-$export_path_contact = "c:\temp\delegation\contact.csv"
-$export_path_messagecopy = "c:\temp\delegation\messagecopy.csv"
+$export_path_fullaccess = "c:\temp\delegation\fullaccess_export.csv"
+$export_path_sendas = "c:\temp\delegation\sendas_export.csv"
+$export_path_sendonbehalf = "c:\temp\delegation\sendonbehalf_export.csv"
+$export_path_calendar = "c:\temp\delegation\calendar_export.csv"
+$export_path_contact = "c:\temp\delegation\contact_export.csv"
+$export_path_messagecopy = "c:\temp\delegation\messagecopy_export.csv"
 
 
 Connect-ExchangeOnline -UserPrincipalName $username
