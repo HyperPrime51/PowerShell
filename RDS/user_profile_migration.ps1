@@ -1,6 +1,7 @@
 # variables
-$source = "F:\"
+$source = "F:"
 $target = "\\rds-02\c$\users\clee"
+$target_drive = "G:"
 
 # desktop
 Copy-item -Force -Recurse -Verbose -Path "$($source)\desktop" -Destination "$($target)\desktop"
@@ -21,13 +22,13 @@ Copy-item -Force -Verbose -Path "$($source)\AppData\Local\Google\Chrome\User Dat
 # pinned folders
 Copy-item -Force -Recurse -Verbose -Path "$($source)\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations" -Destination "$($target)\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations"
 
-
-
-# pinned app in taskbar, needs to be run on user profile
+# pinned app in taskbar
 # export
-REG EXPORT HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband "%userprofile%\tb-pinned-items.reg"
-xcopy "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar" "%userprofile%\Pinned Items Backup\pinnedshortcuts" /E /C /H /R /K /Y
+Import-RegistryHive -File "$($source)\NTUSER.DAT" -Key 'HKU\TEMP_SOURCE_HIVE' -Name TempSourceHive
+REG EXPORT HKEY_USER\TEMP_HIVE\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband "$($target)\tb-pinned-items.reg"
+Copy-item -Force -Recurse -Verbose -Path "$($source)\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar" -Destination "$($target)\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar"
+Remove-RegistryHive -Name TempSourceHive
 
 # import
+# needs to run under user profile
 REGEDIT /S "%userprofile%\tb-pinned-items.reg"
-xcopy "%userprofile%\Pinned Items Backup\pinnedshortcuts" "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar" /E /C /H /R /K /Y
